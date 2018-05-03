@@ -80,10 +80,15 @@ yellow open   test-elasticsearch-sink 6u15T7_IQ_WWqzEn5yil5Q   5   1          8 
 
 Ref:
 https://github.com/confluentinc/examples.github
+
 https://github.com/apache/avro.git
+
 https://www.confluent.io/download/
+
 https://www.elastic.co/downloads/elasticsearch
+
 https://docs.confluent.io/current/schema-registry/docs/intro.html
+
 https://docs.confluent.io/current/schema-registry/docs/serializer-formatter.html
 
 Note: All the tests performed in Single PC as standalone mode. For distributed system, we may have to tweak the etc/../properties of confluent configuration to add node clustering for ELK, Kafka. Planning to run multiple VMs for distributed env in my PC. That's still in progress....
