@@ -77,6 +77,50 @@ health status index                   uuid                   pri rep docs.count 
 yellow open   clicks                  nSXiKJXES-232dwH8nMdiA   5   1        406            0    121.5kb        121.5kb
 yellow open   test-elasticsearch-sink 6u15T7_IQ_WWqzEn5yil5Q   5   1          8            0     24.4kb         24.4kb
 
+Get the data for indice 'clicks':
+curl -XGET 'http://localhost:9200/clicks/_search?pretty'
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 459,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "clicks",
+        "_type" : "kafka-connect",
+        "_id" : "clicks+0+15",
+        "_score" : 1.0,
+        "_source" : {
+          "ip" : "66.249.1.1",
+          "timestamp" : 1525331851669,
+          "url" : "bar.html",
+          "referrer" : "www.example.com",
+          "useragent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36",
+          "sessionid" : null
+        }
+      },
+      {
+        "_index" : "clicks",
+        "_type" : "kafka-connect",
+        "_id" : "clicks+0+16",
+        "_score" : 1.0,
+        "_source" : {
+          "ip" : "66.249.1.5",
+          "timestamp" : 1525333310267,
+          "url" : "foo.html",
+          "referrer" : "www.example.com",
+          "useragent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36",
+          "sessionid" : null
+        }
+      }
+
 
 Ref:
 https://github.com/confluentinc/examples.github
