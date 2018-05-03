@@ -13,9 +13,9 @@ https://www.confluent.io/download/
 
 	confluent start
 
-3. Start elasticsearch-sink connector for indexing the data from kafka server to Elasticsearch
-	
-	confluent load elasticsearch-sink
+3. Start elasticsearch-sink connector for indexing the data from kafka server to Elasticsearch.
+
+		confluent load elasticsearch-sink
 
 4. Follow this link to push some test data to Elasticsearch from Kafka
 https://docs.confluent.io/current/connect/connect-elasticsearch/docs/elasticsearch_connector.html
@@ -28,21 +28,23 @@ Get the data for index "test-elasticsearch-sink" from Elasticsearch
 
 5. Get the list of indices from Elasticsearch
 
-	curl 'localhost:9200/_cat/indices?v'
+		curl 'localhost:9200/_cat/indices?v'
 
 6. git clone avro source
 	https://github.com/apache/avro.git
 
 7. Go to java dir inside avro
-	cd ~/git/avro/lang/java
-	./build.sh dist
+
+		cd ~/git/avro/lang/java
+		./build.sh dist
+	
 Note: if you face any issues related to javadoc, you can fix the errors or skip javadoc in mvn command.
 
 8. Now you will have avro tools at ~/git/avro/lang/java/tools/target
 
 9. Generate java files for specific avro schema file
 
-	java -jar ~/git/avro/lang/java/tools/target/avro-tools-1.9.0-SNAPSHOT.jar compile schema user.avsc .
+		java -jar ~/git/avro/lang/java/tools/target/avro-tools-1.9.0-SNAPSHOT.jar compile schema user.avsc .
 	
 	Note: currently we are not using this file. But we may use it later for project specific schema..
 
@@ -50,22 +52,26 @@ Note: if you face any issues related to javadoc, you can fix the errors or skip 
 
 11. git clone of examples from confluent for java avro producer using schema registry
 
-	git clone https://github.com/confluentinc/examples.git
 
-	Generate the java package using examples/kafka-clients/specific-avro-producer/readme.md file.
+		git clone https://github.com/confluentinc/examples.git
+
+Generate the java package using examples/kafka-clients/specific-avro-producer/readme.md file.
 	
-	Run the program later using 
+Run the program later using 
+	
 	java -cp target/uber-clickstream-generating-producer-1.0-SNAPSHOT.jar io.confluent.examples.producer.AvroClicksProducer http://localhost:8081
 
 12. Add new topic 'clicks' to kafkaConnector, which is used by above program.
 
-	curl -X PUT -H "Content-Type: application/json" --data '{"connector.class":"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector","type.name":"kafka-connect","tasks.max":"1","topics":"test-elasticsearch-sink,clicks","name":"elasticsearch-sink","key.ignore":"true","connection.url":"http://localhost:9200"}' localhost:8083/connectors/elasticsearch-sink/config
+		curl -X PUT -H "Content-Type: application/json" --data '{"connector.class":"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector","type.name":"kafka-connect","tasks.max":"1","topics":"test-elasticsearch-sink,clicks","name":"elasticsearch-sink","key.ignore":"true","connection.url":"http://localhost:9200"}' localhost:8083/connectors/elasticsearch-sink/config
 
 13. Run the producer program by
-	java -cp target/uber-clickstream-generating-producer-1.0-SNAPSHOT.jar io.confluent.examples.producer.AvroClicksProducer http://localhost:8081
+
+		java -cp target/uber-clickstream-generating-producer-1.0-SNAPSHOT.jar io.confluent.examples.producer.AvroClicksProducer http://localhost:8081
 
 13. Get the indices again from Elaticsearch. you can see that new indice is added with name 'clicks' and docs.count is getting incremented.
-curl 'localhost:9200/_cat/indices?v'
+
+		curl 'localhost:9200/_cat/indices?v'
 `-->$ curl 'localhost:9200/_cat/indices?v'
 health status index                   uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 yellow open   clicks                  nSXiKJXES-232dwH8nMdiA   5   1        406            0    121.5kb        121.5kb
