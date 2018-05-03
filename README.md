@@ -72,13 +72,16 @@ Run the program later using
 13. Get the indices again from Elaticsearch. you can see that new indice is added with name 'clicks' and docs.count is getting incremented.
 
 		curl 'localhost:9200/_cat/indices?v'
+		
 `-->$ curl 'localhost:9200/_cat/indices?v'
 health status index                   uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 yellow open   clicks                  nSXiKJXES-232dwH8nMdiA   5   1        406            0    121.5kb        121.5kb
 yellow open   test-elasticsearch-sink 6u15T7_IQ_WWqzEn5yil5Q   5   1          8            0     24.4kb         24.4kb
 
 Get the data for indice 'clicks':
+
 curl -XGET 'http://localhost:9200/clicks/_search?pretty'
+
 {
   "took" : 5,
   "timed_out" : false,
