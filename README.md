@@ -101,7 +101,7 @@ curl -XGET 'http://localhost:9200/clicks/_search?pretty'
         "_id" : "clicks+0+15",
         "_score" : 1.0,
         "_source" : {
-          "ip" : "66.249.1.1",
+          "ip" : "xx.xx.x.x",
           "timestamp" : 1525331851669,
           "url" : "bar.html",
           "referrer" : "www.example.com",
@@ -115,7 +115,7 @@ curl -XGET 'http://localhost:9200/clicks/_search?pretty'
         "_id" : "clicks+0+16",
         "_score" : 1.0,
         "_source" : {
-          "ip" : "66.249.1.5",
+          "ip" : "xx.xx.x.x",
           "timestamp" : 1525333310267,
           "url" : "foo.html",
           "referrer" : "www.example.com",
